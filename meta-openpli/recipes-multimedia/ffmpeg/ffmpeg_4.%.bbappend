@@ -43,8 +43,8 @@ EXTRA_FFCONF = " \
     --disable-fma3 \
     --disable-fma4 \
     --disable-avx2 \
-    --enable-inline-asm \
-    --enable-asm \
+    --disable-inline-asm \
+    --disable-yasm \
     --disable-x86asm \
     --disable-fast-unaligned \
     --enable-muxers \
@@ -58,8 +58,6 @@ EXTRA_FFCONF = " \
     --enable-outdevs \
     --enable-filters \
     --disable-doc \
-    --enable-libfdk-aac \
-    --enable-encoder=libfdk_aac \
     --disable-htmlpages \
     --disable-manpages \
     --disable-podpages \
