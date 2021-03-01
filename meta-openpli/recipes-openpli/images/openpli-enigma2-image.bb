@@ -32,6 +32,7 @@ ENIGMA2_PLUGINS += "\
 	enigma2-plugin-extensions-audiosync \
 	enigma2-plugin-extensions-autobackup \
 	enigma2-plugin-extensions-cutlisteditor \
+	enigma2-plugin-extensions-dvdplayer \
 	enigma2-plugin-extensions-graphmultiepg \
 	enigma2-plugin-extensions-mediaplayer \
 	enigma2-plugin-extensions-mediascanner \
@@ -42,6 +43,8 @@ ENIGMA2_PLUGINS += "\
 	enigma2-plugin-extensions-dlnabrowser \
 	enigma2-plugin-extensions-dlnaserver \
 	enigma2-plugin-extensions-subssupport \
+	enigma2-plugin-extensions-filecommander \
+	enigma2-plugin-extensions-youtube \
 	\
 	enigma2-plugin-systemplugins-fastscan \
 	enigma2-plugin-systemplugins-hotplug \
