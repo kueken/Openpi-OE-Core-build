@@ -251,6 +251,7 @@ EXTRA_FFCONF = " \
 	--enable-demuxer=flac \
 	--enable-demuxer=flv \
 	--enable-demuxer=h264 \
+	--enable-demuxer=h265 \
 	--enable-demuxer=hls \
 	--enable-demuxer=image2 \
 	--enable-demuxer=image2pipe \
