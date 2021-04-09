@@ -34,6 +34,7 @@ IMAGE_INSTALL = "\
 	parted \
 	python-ipaddress  \
 	python-netifaces \
+	python-psutil \
 	python-pysmb \
 	samba-base \
 	sdparm \
