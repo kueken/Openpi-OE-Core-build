@@ -25,7 +25,7 @@ EXTRA_FFCONF = " \
 	--prefix=${prefix} \
 	--disable-runtime-cpudetect \
 	--disable-ffplay \
-	--disable-ffprobe \
+	--enable-ffprobe \
 	\
 	--disable-doc \
 	--disable-htmlpages \
