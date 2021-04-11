@@ -119,8 +119,10 @@ OPTIONAL_PACKAGES += " \
 	python-js2py \
 	python-pyexecjs \
 	python-beautifulsoup4 \
+	python-bluetool \
 	python-futures \
 	python-pycrypto \
+	python-psutil \
 	python-singledispatch \
 	python-websocket \
 	python-isodate \
