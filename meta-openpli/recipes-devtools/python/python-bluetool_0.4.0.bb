@@ -6,8 +6,10 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=4fe869ee987a340198fb0d54c55c47f1"
 
 inherit pypi setuptools
 
-SRC_URI[md5sum] = "f65c673c45c5291bce8a0b8755986b9f"
-SRC_URI[sha256sum] = "09aca1174ea9d8b402f2231aa2277726174c30482710fc887ebbda7eb820f614"
+SRC_URI = "https://github.com/emlid/bluetool/archive/refs/tags/${PV}.tar.gz"
+
+SRC_URI[md5sum] = "1c0d64032af61e403963b88486957c69"
+SRC_URI[sha256sum] = "91b2ee9e54fe7df2150edef5b4149495251636e77d6cdd3be457faea04433ccb"
 
 RDEPENDS_${PN} = "python-dbus python-tcpbridge python-pygobject"
 
