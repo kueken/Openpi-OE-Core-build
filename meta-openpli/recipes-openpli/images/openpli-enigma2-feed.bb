@@ -81,6 +81,7 @@ OPTIONAL_PACKAGES += " \
 	htop \
 	inadyn-mt \
 	inetutils \
+	inotify-tools \
 	iperf3 \
 	iproute2 \
 	iputils \
@@ -108,8 +109,8 @@ OPTIONAL_PACKAGES += " \
 	openmultiboot \
 	p7zip \
 	parted \
-	pyload \
 	procps \
+	pyload \
 	python-ipaddress \
 	python-ntplib \
 	python-pip \
@@ -124,7 +125,7 @@ OPTIONAL_PACKAGES += " \
 	python-pycrypto \
 	python-psutil \
 	python-singledispatch \
-	python-websocket \
+	python-websocket-client \
 	python-isodate \
 	python-iso3166 \
 	python-iso639 \
@@ -143,6 +144,7 @@ OPTIONAL_PACKAGES += " \
 	sshpass \
 	smartmontools \
 	strace \
+	streamlink-27 \
 	tcpdump \
 	tmux \
 	transmission \

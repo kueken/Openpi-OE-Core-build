@@ -36,6 +36,7 @@ IMAGE_INSTALL = "\
 	python-netifaces \
 	python-pysmb \
 	samba-base \
+	streamlink-27 \
 	sdparm \
 	tuxbox-common \
 	tzdata \
