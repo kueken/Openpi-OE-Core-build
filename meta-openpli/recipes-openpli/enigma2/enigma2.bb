@@ -67,7 +67,6 @@ PYTHON_RDEPS = " \
 	python-pyusb \
 	python-image \
 	python-imaging \
-	python-process \
 	python-youtube-dl \
 	"
 
