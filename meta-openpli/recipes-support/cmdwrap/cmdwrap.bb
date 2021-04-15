@@ -8,10 +8,10 @@ inherit gitpkgv
 PV = "2.1+git${SRCPV}"
 PKGV = "2.1+git${GITPKGV}"
 
-
-SRC_URI = "git://github.com/e2iplayer/e2ibox.git;protocol=git"
+SRC_URI = "git://github.com/Hains/cmdwrapper.git;branch=main;protocol=git"
 SRCREV = "${AUTOREV}"
-S = "${WORKDIR}/git/"
+
+S = "${WORKDIR}/git"
 
 SOURCE_FILES = "src/main.c src/cmdwrapper.h src/cmdwrapper.c"
 
