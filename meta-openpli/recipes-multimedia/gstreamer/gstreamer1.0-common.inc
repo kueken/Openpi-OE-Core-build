@@ -5,7 +5,7 @@ inherit gitpkgv meson gettext
 PV = "${GST_VERSION_FULL}+git${SRCPV}"
 PKGV = "${GST_VERSION_FULL}+git${GITPKGV}"
 
-SRCREV_gst = "93e6261db7a43b5ad50aade1742d3824e79c5ef1"
+SRCREV_gst = "b566cbe0222439aad0c67b39161e6ffdd3747ebe"
 SRCREV_gst_libav = "801dc93b790e9a96aa437a3f344214170c0bd540"
 
 SRCREV_gst_plugins_bad = "c4321ee4a82c9d3426675de13f2c20c9a1d35e30"
