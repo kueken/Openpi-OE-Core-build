@@ -16,4 +16,4 @@ FILES_${PN}-dbg += " \
     ${libdir}/${PYTHON_DIR}/site-packages/twisted/*/*/test \
 "
 
-RDEPENDS_${PN}-core += "${PYTHON_PN}-service-identity"
+RDEPENDS_${PN}-core += "python-service-identity"
