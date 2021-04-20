@@ -9,8 +9,8 @@ RDEPENDS_${PN} = "ffmpeg libbluray"
 
 inherit gitpkgv
 
-PV = "68+gitr${SRCPV}"
-PKGV = "68+gitr${GITPKGV}"
+PV = "69+gitr${SRCPV}"
+PKGV = "69+gitr${GITPKGV}"
 
 SRCREV = "${AUTOREV}"
 SRC_URI = "git://github.com/kueken/exteplayer3.git;branch=master"
