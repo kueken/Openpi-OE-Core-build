@@ -13,13 +13,17 @@ RPROVIDES_${PN} += "virtual/kodi"
 
 inherit cmake gettext python-dir pythonnative systemd
 
-DEPENDS += " \
+DEPENDS = " \
             fmt \
-            flatbuffers flatbuffers-native \
+            flatbuffers \
+            flatbuffers-native \
             fstrcmp \
             rapidjson \
             crossguid \
-            libdvdnav libdvdcss libdvdread \
+            texturepacker-native \
+            libdvdnav \
+            libdvdcss \
+            libdvdread \
             git-native \
             curl-native \
             gperf-native \
@@ -27,7 +31,6 @@ DEPENDS += " \
             nasm-native \
             swig-native \
             unzip-native \
-            yasm-native \
             zip-native \
             \
             avahi \
@@ -46,8 +49,6 @@ DEPENDS += " \
             libass \
             libcdio \
             libcec \
-            libdvdcss \
-            libdvdread \
             libinput \
             libbluray \
             libmad \
@@ -74,7 +75,6 @@ DEPENDS += " \
             wavpack \
             yajl \
             zlib \
-            texturepacker-native \
             \
             gstreamer1.0 \
             gstreamer1.0-plugins-base \
@@ -127,7 +127,7 @@ ACCEL_x86-64 = "vaapi vdpau"
 
 WINDOWSYSTEM ?= "stb"
 
-PACKAGECONFIG ??= "${ACCEL} ${WINDOWSYSTEM} pulseaudio lcms lto \
+PACKAGECONFIG ??= "${ACCEL} ${WINDOWSYSTEM} lcms lto \
                    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'x11', '', d)} \
                    ${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'opengl', 'openglesv2', d)}"
 
@@ -262,6 +262,8 @@ RRECOMMENDS_${PN}_append = " libcec \
                              tzdata-europe \
                              tzdata-pacific \
                              xkeyboard-config \
+                             kodi-addon-inputstream-adaptive \
+                             kodi-addon-inputstream-rtmp \
                              alsa-plugins \
                            "
 RRECOMMENDS_${PN}_append_libc-glibc = " glibc-charmap-ibm850 \
