@@ -52,7 +52,7 @@ PYTHON_RDEPS = " \
 	python-numbers \
 	python-pickle \
 	python-psutil \
-	python-pycrypto \
+	python-pycryptodome \
 	python-re \
 	python-requests \
 	python-shell \
