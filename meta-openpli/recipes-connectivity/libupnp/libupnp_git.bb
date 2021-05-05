@@ -9,9 +9,9 @@ LICENSE = "BSD-3-Clause"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=394a0f17b97f33426275571e15920434"
 
-PV = "1.14.2+git${SRCPV}"
-# release-1.14.2
-SRCREV = "da35684e5aa7519e0087dd53054bca5687db79df"
+PV = "1.14.6+git${SRCPV}"
+# release-1.14.6
+SRCREV = "54eb114937732e5e8e2de009d9d953286670a3b0"
 SRC_URI = "git://github.com/mrjimenez/pupnp.git;protocol=https;branch=branch-1.14.x"
 
 S="${WORKDIR}/git"
