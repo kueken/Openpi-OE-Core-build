@@ -140,6 +140,8 @@ PACKAGECONFIG[raspberrypi] = "-DCORE_PLATFORM_NAME=rbpi,,userland"
 PACKAGECONFIG[amlogic] = "-DCORE_PLATFORM_NAME=aml,,"
 PACKAGECONFIG[wayland] = "-DCORE_PLATFORM_NAME=wayland -DWAYLAND_RENDER_SYSTEM=gles,,wayland waylandpp"
 
+# Features
+
 PACKAGECONFIG[opengl] = "-DENABLE_OPENGL=ON,,"
 PACKAGECONFIG[openglesv2] = "-DENABLE_GLES=ON,,virtual/egl"
 
@@ -154,30 +156,13 @@ PACKAGECONFIG[lcms] = ",,lcms"
 PACKAGECONFIG[gold] = "-DENABLE_LDGOLD=ON,-DENABLE_LDGOLD=OFF"
 PACKAGECONFIG[lto] = "-DUSE_LTO=${@oe.utils.cpu_count()},-DUSE_LTO=OFF"
 
-LDFLAGS += "${TOOLCHAIN_OPTIONS}"
-LDFLAGS_append_mips = " -latomic -lpthread"
-LDFLAGS_append_mipsel = " -latomic -lpthread"
-LDFLAGS_append_mips64 = " -latomic -lpthread"
-LDFLAGS_append_mips64el = " -latomic -lpthread"
-
-KODI_ARCH = ""
-KODI_ARCH_mips = "-DWITH_ARCH=${TARGET_ARCH}"
-KODI_ARCH_mipsel = "-DWITH_ARCH=${TARGET_ARCH}"
-KODI_ARCH_mips64 = "-DWITH_ARCH=${TARGET_ARCH}"
-KODI_ARCH_mips64el = "-DWITH_ARCH=${TARGET_ARCH}"
-
-KODI_DISABLE_INTERNAL_LIBRARIES = " \
-  -DENABLE_INTERNAL_CROSSGUID=OFF \
-  -DENABLE_INTERNAL_FLATBUFFERS=OFF \
-  -DENABLE_INTERNAL_FMT=OFF \
-  -DENABLE_INTERNAL_FSTRCMP=0 \
-  -DENABLE_INTERNAL_RapidJSON=OFF \
-  -DENABLE_INTERNAL_FFMPEG=OFF \
-"
-
 EXTRA_OECMAKE = " \
-    ${KODI_ARCH} \
-    ${KODI_DISABLE_INTERNAL_LIBRARIES} \
+    -DENABLE_INTERNAL_CROSSGUID=OFF \
+    -DENABLE_INTERNAL_FLATBUFFERS=OFF \
+    -DENABLE_INTERNAL_FMT=OFF \
+    -DENABLE_INTERNAL_FSTRCMP=0 \
+    -DENABLE_INTERNAL_RapidJSON=OFF \
+    -DENABLE_INTERNAL_FFMPEG=OFF \
     \
     -DNATIVEPREFIX=${STAGING_DIR_NATIVE}${prefix} \
     -DJava_JAVA_EXECUTABLE=/usr/bin/java \
@@ -200,6 +185,11 @@ EXTRA_OECMAKE = " \
     -DENABLE_DEBUGFISSION=OFF \
     -DCMAKE_BUILD_TYPE=RelWithDebInfo \
 "
+
+EXTRA_OECMAKE_append_mipsarch = " -DWITH_ARCH=${TARGET_ARCH}"
+
+LDFLAGS += "${TOOLCHAIN_OPTIONS}"
+LDFLAGS_append_mipsarch = " -latomic -lpthread"
 
 # OECMAKE_GENERATOR="Unix Makefiles"
 #PARALLEL_MAKE = " "
@@ -238,6 +228,7 @@ RRECOMMENDS_${PN}_append = " libcec \
                              nspr \
                              nss \
                              ${@bb.utils.contains('PACKAGECONFIG', 'x11', 'xdyinfo xrandr xinit mesa-demos', '', d)} \
+                             os-release \
                              python \
                              python-ctypes \
                              python-lang \
@@ -245,6 +236,7 @@ RRECOMMENDS_${PN}_append = " libcec \
                              python-netclient \
                              python-html \
                              python-difflib \
+                             python-pycryptodome \
                              python-pycryptodomex \
                              python-json \
                              python-zlib \
