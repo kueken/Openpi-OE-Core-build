@@ -14,6 +14,8 @@ SRC_URI = " \
     file://0003-fix-for-5.1.patch \
     file://0004-fix-for-5.6.patch \
     file://0005-fix-for-5.8.patch \
+    file://0001-add-linux-5.12-support.patch \
+    file://0003-fix-multiple-definitions.patch \
     "
 
 S = "${WORKDIR}"

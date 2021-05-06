@@ -18,6 +18,7 @@ SRC_URI = " \
     file://0001-gcc49.patch \
     file://0002-adjust-policy-kernelversion.patch \
     file://0003-fix-multiple-definitions.patch \
+    file://0001-add-linux-5.12-support.patch \
     "
 
 S = "${WORKDIR}/git"
