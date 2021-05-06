@@ -84,6 +84,7 @@ IMAGE_INSTALL += " \
 	tuxbox-common \
 	htop \
 	wget \
+	streamlinksrv \
 	${ENIGMA2_PLUGINS} \
 	\
 	${WIFI_DRIVERS} \
