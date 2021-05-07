@@ -17,6 +17,7 @@ SRC_URI = "http://download.savannah.nongnu.org/releases/davfs2/${P}.tar.gz \
            file://volatiles \
            file://davfs2.cfg \
 "
+DEPENDS = "fuse libdvdread neon"
 
 inherit autotools pkgconfig useradd gettext
 
