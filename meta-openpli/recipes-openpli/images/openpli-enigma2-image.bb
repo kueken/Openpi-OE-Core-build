@@ -44,7 +44,6 @@ ENIGMA2_PLUGINS += "\
 	enigma2-plugin-extensions-dlnaserver \
 	enigma2-plugin-extensions-subssupport \
 	enigma2-plugin-extensions-filecommander \
-	enigma2-plugin-extensions-youtube \
 	\
 	enigma2-plugin-systemplugins-fastscan \
 	enigma2-plugin-systemplugins-hotplug \
