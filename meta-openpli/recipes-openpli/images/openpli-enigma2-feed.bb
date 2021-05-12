@@ -122,7 +122,7 @@ OPTIONAL_PACKAGES += " \
 	python-beautifulsoup4 \
 	python-bluetool \
 	python-futures \
-	python-pycrypto \
+	python-pycryptodome \
 	python-psutil \
 	python-singledispatch \
 	python-websocket-client \
