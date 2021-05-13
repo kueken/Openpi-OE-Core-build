@@ -25,3 +25,4 @@ DEPENDS = "\
     curl \
     ${PYTHON_PN}\
 "
+include python-package-split.inc
