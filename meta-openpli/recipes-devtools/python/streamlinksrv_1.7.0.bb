@@ -10,7 +10,7 @@ inherit allarch
 RDEPENDS_${PN} = "python-core streamlink-27"
 
 SRC_URI = "git://github.com/athoik/livestreamersrv.git"
-S = "${WORKDIR}/git/"
+S = "${WORKDIR}/git"
 
 inherit gitpkgv
 SRCREV = "${AUTOREV}"
