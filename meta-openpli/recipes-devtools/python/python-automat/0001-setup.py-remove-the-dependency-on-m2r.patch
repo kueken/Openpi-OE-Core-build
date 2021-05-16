@@ -47,4 +47,4 @@ index d360c64..7b4180a 100644
 -        'm2r',
      ],
      install_requires=[
-         "attrs>=16.1.0",
+         "attrs>=19.2.0",
