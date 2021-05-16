@@ -15,3 +15,4 @@ RDEPENDS_${PN}_class-native = "python-setuptools-native python-toml-native"
 RDEPENDS_${PN} += "python-argparse"
 
 BBCLASSEXTEND = "native"
+include python-package-split.inc
