@@ -11,12 +11,12 @@ SRC_URI[sha256sum] = "d5ed2169378b67d3c545e5600d363a923b09c456dab1593914935a68ad
 
 DEPENDS += "python-setuptools-scm-native"
 
-inherit setuptools pypi
+inherit setuptools pypi python-backports-init
 
 RDEPENDS_${PN} += "\
-    python-pkgutil \
-    python-pickle \
-    python-threading \
+    ${PYTHON_PN}-pkgutil \
+    ${PYTHON_PN}-pickle \
+    ${PYTHON_PN}-threading \
     "
 
 do_install_append() {
