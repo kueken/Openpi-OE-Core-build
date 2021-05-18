@@ -19,7 +19,11 @@ RDEPENDS_${PN} += "\
     ${PYTHON_PN}-threading \
     "
 
-do_install_append() {
-    # python-lzma already provides __init__.py(o) files
-    rm -rf ${D}${libdir}/${PYTHON_DIR}/site-packages/backports/__init__.py*
+do_install() {
+    install -d ${D}${PYTHON_SITEPACKAGES_DIR}/backports
+    install ${B}/backports/functools_lru_cache.py ${D}${PYTHON_SITEPACKAGES_DIR}/backports/
 }
+
+FILES_${PN} = "${PYTHON_SITEPACKAGES_DIR}/backports/functools_lru_cache.py"
+
+BBCLASSEXTEND = "native nativesdk"
