@@ -1,0 +1,47 @@
+From 3c72a533798a25c5aa827dd9d577eaf86fa54df2 Mon Sep 17 00:00:00 2001
+From: kueken <ohnemailadresse@arcor.de>
+Date: Mon, 17 May 2021 21:15:32 +0200
+Subject: [PATCH] revert python 2 warning
+
+---
+ src/cryptography/__init__.py | 13 -------------
+ 1 file changed, 13 deletions(-)
+
+diff --git a/src/cryptography/__init__.py b/src/cryptography/__init__.py
+index 465671ee..7b6ae286 100644
+--- a/src/cryptography/__init__.py
++++ b/src/cryptography/__init__.py
+@@ -4,9 +4,6 @@
+ 
+ from __future__ import absolute_import, division, print_function
+ 
+-import sys
+-import warnings
+-
+ from cryptography.__about__ import (
+     __author__,
+     __copyright__,
+@@ -17,7 +14,6 @@ from cryptography.__about__ import (
+     __uri__,
+     __version__,
+ )
+-from cryptography.utils import CryptographyDeprecationWarning
+ 
+ 
+ __all__ = [
+@@ -30,12 +26,3 @@ __all__ = [
+     "__license__",
+     "__copyright__",
+ ]
+-
+-if sys.version_info[0] == 2:
+-    warnings.warn(
+-        "Python 2 is no longer supported by the Python core team. Support for "
+-        "it is now deprecated in cryptography, and will be removed in the "
+-        "next release.",
+-        CryptographyDeprecationWarning,
+-        stacklevel=2,
+-    )
+-- 
+2.25.1
+
