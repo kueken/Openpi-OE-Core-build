@@ -29,4 +29,3 @@ FILES_${PN}-tests += " \
 include python-package-split.inc
 
 BBCLASSEXTEND = "native nativesdk"
-
