@@ -11,7 +11,7 @@ PR = "r0"
 SRC_URI[md5sum] = "930487ab22664a73fa8938483752eb03"
 SRC_URI[sha256sum] = "2e6b675685bd917772be60f0999ae098c80f79ff20dc131e8fec4547cbb63b50"
 
-SRC_URI = "http://download.savannah.nongnu.org/releases/davfs2/${PN}.tar.gz \
+SRC_URI = "http://download.savannah.nongnu.org/releases/davfs2/${P}.tar.gz \
            file://neon-config \
            file://volatiles \
            file://davfs2.cfg \
