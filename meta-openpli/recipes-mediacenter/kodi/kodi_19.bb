@@ -5,11 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.md;md5=7b423f1c9388eae123332e372451a4f7"
 
 FILESPATH =. "${FILE_DIRNAME}/kodi-18:"
 
-PACKAGE_ARCH = "${MACHINE_ARCH}"
-
-PROVIDES += "virtual/kodi"
-# FIX-ME: virtual/ never makes sense in runtime variables
-RPROVIDES_${PN} += "virtual/kodi"
+PACKAGE_ARCH = "${MACHINE}"
 
 inherit cmake gettext python-dir pythonnative systemd
 
@@ -61,6 +57,7 @@ DEPENDS = " \
             libsamplerate0 \
             libsquish \
             libssh \
+            spdlog \
             libtinyxml \
             libusb1 \
             libxkbcommon \
@@ -80,16 +77,15 @@ DEPENDS = " \
             gstreamer1.0-plugins-base \
           "
 
-SRCREV = "0655c2c71821567e4c21c1c5a508a39ab72f0ef1"
+SRCREV = "6234ab30becc68ac1582655dbb23c93fe6dc3152"
 
 # 'patch' doesn't support binary diffs
 PATCHTOOL = "git"
 
-# Correct 18+git vs 18-git screwup
-PE = "1"
+PR = "r0"
 
-PV = "18.9+gitr${SRCPV}"
-SRC_URI = "git://github.com/xbmc/xbmc.git;protocol=https;branch=Leia \
+PV = "19.1-gitr${SRCPV}"
+SRC_URI = "git://github.com/xbmc/xbmc.git;protocol=https;branch=Matrix \
            \
            file://0001-Add-support-for-musl-triplets.patch \
            file://0002-Fix-file_Emu-on-musl.patch \
@@ -118,7 +114,7 @@ SRC_URI_append = " \
 S = "${WORKDIR}/git"
 
 # breaks compilation
-CCACHE = ""
+CCACHE_DISABLE = "1"
 ASNEEDED = ""
 
 ACCEL ?= ""
@@ -127,7 +123,9 @@ ACCEL_x86-64 = "vaapi vdpau"
 
 WINDOWSYSTEM ?= "stb"
 
-PACKAGECONFIG ??= "${ACCEL} ${WINDOWSYSTEM} lcms lto \
+APPRENDERSYSTEM ?= "gles"
+
+PACKAGECONFIG ??= "${ACCEL} ${WINDOWSYSTEM} pulseaudio lcms lto \
                    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'x11', '', d)} \
                    ${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'opengl', 'openglesv2', d)}"
 
@@ -139,8 +137,6 @@ PACKAGECONFIG[stb] = "-DCORE_PLATFORM_NAME=stb,,"
 PACKAGECONFIG[raspberrypi] = "-DCORE_PLATFORM_NAME=rbpi,,userland"
 PACKAGECONFIG[amlogic] = "-DCORE_PLATFORM_NAME=aml,,"
 PACKAGECONFIG[wayland] = "-DCORE_PLATFORM_NAME=wayland -DWAYLAND_RENDER_SYSTEM=gles,,wayland waylandpp"
-
-# Features
 
 PACKAGECONFIG[opengl] = "-DENABLE_OPENGL=ON,,"
 PACKAGECONFIG[openglesv2] = "-DENABLE_GLES=ON,,virtual/egl"
@@ -174,6 +170,7 @@ EXTRA_OECMAKE = " \
     -DNFS_INCLUDE_DIR=${STAGING_INCDIR} \
     -DSHAIRPLAY_INCLUDE_DIR=${STAGING_INCDIR} \
     \
+    -DENABLE_AIRTUNES=ON \
     -DENABLE_OPTICAL=OFF \
     -DENABLE_DVDCSS=OFF \
     -DENABLE_DEBUGFISSION=OFF \
@@ -186,9 +183,10 @@ LDFLAGS += "${TOOLCHAIN_OPTIONS}"
 LDFLAGS_append_mipsarch = " -latomic -lpthread"
 
 # OECMAKE_GENERATOR="Unix Makefiles"
-#PARALLEL_MAKE = " "
+# PARALLEL_MAKE = " "
 
-FULL_OPTIMIZATION_armv7a = "-fexpensive-optimizations -fomit-frame-pointer -O4 -ffast-math"
+FULL_OPTIMIZATION_armv7a = "-fexpensive-optimizations -fomit-frame-pointer -O3 -ffast-math"
+FULL_OPTIMIZATION_armv7ve = "-fexpensive-optimizations -fomit-frame-pointer -O3 -ffast-math"
 BUILD_OPTIMIZATION = "${FULL_OPTIMIZATION}"
 
 # for python modules
@@ -201,17 +199,22 @@ export PYTHON_DIR
 export TARGET_PREFIX
 
 do_configure_prepend() {
-	# Ensure 'nm' can find the lto plugins 
-	liblto=$(find ${STAGING_DIR_NATIVE} -name "liblto_plugin.so.0.0.0")
-	mkdir -p ${STAGING_LIBDIR_NATIVE}/bfd-plugins
-	ln -sf $liblto ${STAGING_LIBDIR_NATIVE}/bfd-plugins/liblto_plugin.so
+    # Ensure 'nm' can find the lto plugins 
+    liblto=$(find ${STAGING_DIR_NATIVE} -name "liblto_plugin.so.0.0.0")
+    mkdir -p ${STAGING_LIBDIR_NATIVE}/bfd-plugins
+    ln -sf $liblto ${STAGING_LIBDIR_NATIVE}/bfd-plugins/liblto_plugin.so
 
-	sed -i -e 's:CMAKE_NM}:}${TARGET_PREFIX}gcc-nm:' ${S}/xbmc/cores/DllLoader/exports/CMakeLists.txt
+    sed -i -e 's:CMAKE_NM}:}${TARGET_PREFIX}gcc-nm:' ${S}/xbmc/cores/DllLoader/exports/CMakeLists.txt
 }
 
-INSANE_SKIP_${PN} = "rpaths"
+INSANE_SKIP_${PN} = "rpaths already-stripped"
 
-FILES_${PN} += "${datadir}/xsessions ${datadir}/icons ${libdir}/xbmc ${datadir}/xbmc ${libdir}/firewalld"
+FILES_${PN} = "${libdir}/kodi ${libdir}/xbmc"
+FILES_${PN} += "${bindir}/kodi ${bindir}/xbmc"
+FILES_${PN} += "${datadir}/icons ${datadir}/kodi ${datadir}/xbmc"
+FILES_${PN} += "${bindir}/kodi-standalone ${bindir}/xbmc-standalone ${datadir}/xsessions"
+FILES_${PN} += "${libdir}/firewalld"
+FILES_${PN}-dev = "${includedir}"
 FILES_${PN}-dbg += "${libdir}/kodi/.debug ${libdir}/kodi/*/.debug ${libdir}/kodi/*/*/.debug ${libdir}/kodi/*/*/*/.debug"
 
 # kodi uses some kind of dlopen() method for libcec so we need to add it manually
@@ -219,25 +222,25 @@ FILES_${PN}-dbg += "${libdir}/kodi/.debug ${libdir}/kodi/*/.debug ${libdir}/kodi
 RRECOMMENDS_${PN}_append = " libcec \
                              libcurl \
                              libnfs \
-                             nspr \
                              nss \
-                             ${@bb.utils.contains('PACKAGECONFIG', 'x11', 'xdyinfo xrandr xinit mesa-demos', '', d)} \
                              os-release \
-                             python \
-                             python-ctypes \
-                             python-lang \
-                             python-re \
-                             python-netclient \
-                             python-html \
-                             python-difflib \
-                             python-pycryptodome \
-                             python-pycryptodomex \
-                             python-json \
-                             python-zlib \
-                             python-shell \
-                             python-sqlite3 \
-                             python-compression \
-                             python-xmlrpc \
+                             ${@bb.utils.contains('PACKAGECONFIG', 'x11', 'xdyinfo xrandr xinit mesa-demos', '', d)} \
+                             ${PYTHON_PN} \
+                             ${PYTHON_PN}-ctypes \
+                             ${@bb.utils.contains("PYTHON_PN", "python", "${PYTHON_PN}-lang", "", d)} \
+                             ${@bb.utils.contains("PYTHON_PN", "python", "${PYTHON_PN}-re", "", d)} \
+                             ${PYTHON_PN}-netclient \
+                             ${PYTHON_PN}-html \
+                             ${PYTHON_PN}-difflib \
+                             ${PYTHON_PN}-json \
+                             ${@bb.utils.contains("PYTHON_PN", "python", "${PYTHON_PN}-zlib", "", d)} \
+                             ${PYTHON_PN}-shell \
+                             ${PYTHON_PN}-sqlite3 \
+                             ${PYTHON_PN}-compression \
+                             ${PYTHON_PN}-xmlrpc \
+                             ${PYTHON_PN}-pycryptodomex \
+                             ${PYTHON_PN}-mechanize \
+                             ${PYTHON_PN}-profile \
                              tzdata-africa \
                              tzdata-americas \
                              tzdata-antarctica \
@@ -248,18 +251,19 @@ RRECOMMENDS_${PN}_append = " libcec \
                              tzdata-europe \
                              tzdata-pacific \
                              xkeyboard-config \
-                             kodi-addon-inputstream-adaptive \
-                             kodi-addon-inputstream-rtmp \
+                             kodi-addon-inputstream-adaptive-matrix \
+                             kodi-addon-inputstream-rtmp-matrix \
                              alsa-plugins \
                            "
+
 RRECOMMENDS_${PN}_append_libc-glibc = " glibc-charmap-ibm850 \
                                         glibc-gconv-ibm850 \
                                         glibc-charmap-ibm437 \
                                         glibc-gconv-ibm437 \
-					glibc-gconv-unicode \
+                                        glibc-gconv-unicode \
                                         glibc-gconv-utf-32 \
-					glibc-charmap-utf-8 \
-					glibc-localedata-en-us \
+                                        glibc-charmap-utf-8 \
+                                        glibc-localedata-en-us \
                                       "
 # customizations should be in the BSP layers
-require kodi_18.inc
+require kodi_19.inc

@@ -6,9 +6,9 @@ PACKAGE_ARCH = "${MACHINE}"
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://src/util/XMLUtils.cpp;beginline=2;endline=18;md5=dae8e846500e70dd8ecee55f3f018c30"
 
-DEPENDS = "libtinyxml virtual/kodi"
+DEPENDS = "libtinyxml kodi"
 
-PV = "18.0.0"
+PV = "19.0.0"
 
 SRCREV = "e8574b883ffa2131f2eeb96ff3724d60b21130f7"
 SRC_URI = "git://github.com/xbmc/kodi-platform.git;protocol=https \

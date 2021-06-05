@@ -3,10 +3,10 @@ SUMMARY = "Kodi Media Center"
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://JsonSchemaBuilder.cpp;beginline=2;endline=18;md5=1f67721215c03f66545390f6e45b99c7"
 
-SRCREV = "661dd08d221f5b2bf509a696a6aca5ee7d45bb27"
+SRCREV = "f44fdfbf675f30c01e7639177a34544e6a6b9dad"
 
-PV = "18.9+gitr${SRCPV}"
-SRC_URI = "git://github.com/xbmc/xbmc.git;branch=Krypton"
+PV = "19.0+gitr${SRCPV}"
+SRC_URI = "git://github.com/xbmc/xbmc.git;branch=master"
 
 inherit autotools-brokensep gettext native
 
