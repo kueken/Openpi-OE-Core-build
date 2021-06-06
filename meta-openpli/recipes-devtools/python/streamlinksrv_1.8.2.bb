@@ -9,13 +9,13 @@ inherit allarch
 
 RDEPENDS_${PN} = "python-core streamlink-27"
 
-SRC_URI = "git://github.com/athoik/livestreamersrv.git"
+SRC_URI = "git://github.com/kueken/livestreamersrv.git"
 S = "${WORKDIR}/git"
 
 inherit gitpkgv
 SRCREV = "${AUTOREV}"
-PV = "1.7.0+git${SRCPV}"
-PKGV = "1.7.0+git${GITPKGV}"
+PV = "1.8.2+git${SRCPV}"
+PKGV = "1.8.2+git${GITPKGV}"
 
 PACKAGES = "${PN}"
 
