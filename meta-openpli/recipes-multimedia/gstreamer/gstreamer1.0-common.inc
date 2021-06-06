@@ -8,9 +8,9 @@ PKGV = "${GST_VERSION_FULL}+git${GITPKGV}"
 SRCREV_gst = "53c68d92d8e158b9b7d9d26baaf14214e462c451"
 SRCREV_gst_libav = "0d9554d95b08d54a3ae126bb0a6189dfa708cf7e"
 
-SRCREV_gst_plugins_bad = "e9201ea6ad577dd65b7d993b1347bf062c788c6d"
-SRCREV_gst_plugins_base = "61e8ba683538e3bc4525fd7a7a062d0507593c0d"
-SRCREV_gst_plugins_good = "723f0efc233612cce8a0a7f46656aceb8ce7c301"
+SRCREV_gst_plugins_bad = "33468eb32f11fb45363acd3396d38dde313eb2a4"
+SRCREV_gst_plugins_base = "5f11694ac757917bc94278c1eafdf819d6b56674"
+SRCREV_gst_plugins_good = "beba0254d8aa60f5f03eedacaec2955a6c896c31"
 SRCREV_gst_plugins_ugly = "b9b5c66e7842757720d7ca79005eb56e8cea453d"
 
 S = "${WORKDIR}/git"
