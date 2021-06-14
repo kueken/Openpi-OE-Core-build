@@ -9,6 +9,8 @@ PACKAGECONFIG_remove = "acl cups"
 EXTRA_OECONF += " \
                  --without-cluster-support \
                  --without-profiling-data \
+                 --with-lockdir=${@bb.utils.contains('IMAGE_FSTYPES','jffs2','${localstatedir}/run/samba','${localstatedir}/lib/samba',d)} \
+                 --with-cachedir=${localstatedir}/lib/samba \
                  --with-sockets-dir=${localstatedir}/run \
                  --with-logfilebase=${localstatedir}/log/samba \
                  --with-pam \
@@ -88,6 +90,9 @@ do_install_append() {
 	rm -fR ${D}${sysconfdir}/tmpfiles.d
 	rm -fR ${D}${sysconfdir}/sysconfig
 	rm -f ${D}${sysconfdir}/init.d/samba
+    if ${@bb.utils.contains('IMAGE_FSTYPES','jffs2','true','false',d)}; then
+		rm -rf ${D}${localstatedir}/run/samba
+    fi
 	install -d ${D}${sysconfdir}/pam.d
 	install -m 644 ${WORKDIR}/pam.config ${D}${sysconfdir}/pam.d/samba
 	install -d ${D}${sysconfdir}/samba
