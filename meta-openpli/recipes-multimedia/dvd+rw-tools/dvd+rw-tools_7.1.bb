@@ -5,18 +5,17 @@ PR = "r4"
 
 DEPENDS += "m4-native"
 RDEPENDS_${PN} += "cdrkit"
-
-SRC_URI = " http://fy.chalmers.se/~appro/linux/DVD+RW/tools/dvd+rw-tools-${PV}.tar.gz \
-			file://01-growisofs-pioneer.dpatch;apply=yes \
-			file://02-growisofs-manpage.dpatch;apply=yes \
-			file://03-growisofs-dvd-dl.dpatch;apply=yes \
-			file://04-kfreebsd.dpatch;apply=yes \
-			file://07-beeping.dpatch;apply=yes \
-			file://08-cdrkit-code.dpatch;apply=yes \
-			file://09-cdrkit-doc.dpatch;apply=yes \
-			file://10-includes.dpatch;apply=yes \
-			file://11-include-sys-sysmacros.h-for-major-minor-definitions.patch;apply=yes \
-			"
+SRC_URI = "http://fy.chalmers.se/~appro/linux/DVD+RW/tools/dvd+rw-tools-${PV}.tar.gz \
+           file://01-growisofs-pioneer.dpatch;apply=yes \
+           file://02-growisofs-manpage.dpatch;apply=yes \
+           file://03-growisofs-dvd-dl.dpatch;apply=yes \
+           file://04-kfreebsd.dpatch;apply=yes \
+           file://07-beeping.dpatch;apply=yes \
+           file://08-cdrkit-code.dpatch;apply=yes \
+           file://09-cdrkit-doc.dpatch;apply=yes \
+           file://10-includes.dpatch;apply=yes \
+           file://add-major-minor.patch \
+          "
 
 do_configure() {
 	m4 -DOS=Linux Makefile.m4 >Makefile
