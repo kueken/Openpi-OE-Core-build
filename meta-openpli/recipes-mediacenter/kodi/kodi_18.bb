@@ -3,23 +3,20 @@ SUMMARY = "Kodi Media Center"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://LICENSE.md;md5=7b423f1c9388eae123332e372451a4f7"
 
-FILESPATH =. "${FILE_DIRNAME}/kodi-19:"
+FILESEXTRAPATHS_prepend := "${THISDIR}/${BP}:"
 
-PACKAGE_ARCH = "${MACHINE}"
+PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 inherit cmake gettext python-dir pythonnative systemd
 
 DEPENDS = " \
             fmt \
-            flatbuffers \
-            flatbuffers-native \
+            flatbuffers flatbuffers-native \
             fstrcmp \
             rapidjson \
             crossguid \
             texturepacker-native \
-            libdvdnav \
-            libdvdcss \
-            libdvdread \
+            libdvdnav libdvdcss libdvdread \
             git-native \
             curl-native \
             gperf-native \
@@ -27,20 +24,20 @@ DEPENDS = " \
             nasm-native \
             swig-native \
             unzip-native \
+            yasm-native \
             zip-native \
             \
             avahi \
             boost \
             bzip2 \
             curl \
-            libdcadec \
+            dcadec \
             enca \
             expat \
             faad2 \
             ffmpeg \
             fontconfig \
             fribidi \
-            glib-2.0 \ 
             giflib \
             libass \
             libcdio \
@@ -57,7 +54,6 @@ DEPENDS = " \
             libsamplerate0 \
             libsquish \
             libssh \
-            spdlog \
             libtinyxml \
             libusb1 \
             libxkbcommon \
@@ -72,49 +68,54 @@ DEPENDS = " \
             wavpack \
             yajl \
             zlib \
-            \
-            gstreamer1.0 \
-            gstreamer1.0-plugins-base \
-          "
+           "
 
-SRCREV = "6234ab30becc68ac1582655dbb23c93fe6dc3152"
+SRCREV = "0655c2c71821567e4c21c1c5a508a39ab72f0ef1"
 
 # 'patch' doesn't support binary diffs
 PATCHTOOL = "git"
 
-PR = "r0"
+# Correct 18+git vs 18-git screwup
+PE = "1"
 
-PV = "19.1-gitr${SRCPV}"
-SRC_URI = "git://github.com/xbmc/xbmc.git;protocol=https;branch=Matrix \
-           \
-           file://0001-Add-support-for-musl-triplets.patch \
-           file://0002-Fix-file_Emu-on-musl.patch \
-           file://0003-Remove-FILEWRAP.patch \
-           file://0004-Replace-u_int64_t-with-uint64_t-from-stdint.h.patch \
-           \
-           file://0005-estuary-move-recently-added-entries-to-the-top-in-ho.patch \
-           file://0006-kodi.sh-set-mesa-debug.patch \
-           file://0007-peripheral-settings-export-CEC-device_name-in-GUI.patch \
-           file://0010-flatbuffers.patch \
-           file://0011-WIP-windowing-gbm-add-option-to-limit-gui-size.patch \
-           \
-           file://PR15286-shader-nopow.patch \
-           file://15941.patch \
-          "
+PV = "18.9+gitr${SRCPV}"
+SRC_URI = "git://github.com/xbmc/xbmc.git;protocol=https;branch=Leia"
 
+# patches for 18.x upstreamed in 19.x
 SRC_URI_append = " \
-            file://kodi-stb-support.patch \
-            file://egl/kodi-EGL.patch \
-            file://kodi18-add-libinput-rckey-events.patch \
+            file://0001-Add-support-for-musl-triplets.patch \
+            file://0002-Fix-file_Emu-on-musl.patch \
+            file://0003-Remove-FILEWRAP.patch \
+            file://0004-Replace-u_int64_t-with-uint64_t-from-stdint.h.patch \
+            \
+            file://0005-estuary-move-recently-added-entries-to-the-top-in-ho.patch \
+            file://0006-kodi.sh-set-mesa-debug.patch \
+            file://0007-peripheral-settings-export-CEC-device_name-in-GUI.patch \
+            file://0010-flatbuffers.patch \
+            file://0011-WIP-windowing-gbm-add-option-to-limit-gui-size.patch \
+            \
+            file://PR15286-shader-nopow.patch \
+            file://15941.patch \
+           "
+
+# stb, egl, players
+SRC_URI_append = " \
+            file://stb-1-platform.patch \
+            file://stb-2-ext-install.patch \
+            file://stb-3-rckey-events.patch \
+            file://stb-4-crosstools.patch \
+            \
+            file://egl-1-v3d-mali.patch \
+            file://egl-2-windowing.patch \
             \
             ${@bb.utils.contains('MACHINE_FEATURES', 'v3d-nxpl', 'file://egl/EGLNativeTypeV3D-nxpl.patch', '', d)} \
-            ${@bb.utils.contains('MACHINE_FEATURES', 'hisil', 'file://egl/EGLNativeTypeMali.patch file://kodiplayers/HiPlayer.patch file://kodiplayers/HiPlayer-Subs.patch file://defaultplayer-HiPlayer.patch', 'file://defaultplayer-E2Player.patch file://kodiplayers/E2Player.patch', d)} \
-            "
+            ${@bb.utils.contains('MACHINE_FEATURES', 'hisil', 'file://egl/EGLNativeTypeMali.patch file://HiPlayer.patch file://HiPlayer-Subs.patch file://defaultplayer-HiPlayer.patch', 'file://defaultplayer-E2Player.patch file://E2Player.patch', d)} \
+           "
 
 S = "${WORKDIR}/git"
 
 # breaks compilation
-CCACHE_DISABLE = "1"
+CCACHE = ""
 ASNEEDED = ""
 
 ACCEL ?= ""
@@ -123,11 +124,10 @@ ACCEL_x86-64 = "vaapi vdpau"
 
 WINDOWSYSTEM ?= "stb"
 
-APPRENDERSYSTEM ?= "gles"
-
-PACKAGECONFIG ??= "${ACCEL} ${WINDOWSYSTEM} pulseaudio lcms lto \
+PACKAGECONFIG ?= "${ACCEL} ${WINDOWSYSTEM} lcms lto \
                    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'x11', '', d)} \
-                   ${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'opengl', 'openglesv2', d)}"
+                   ${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'opengl', 'openglesv2', d)} \
+                  "
 
 # Core windowing system choices
 
@@ -137,6 +137,8 @@ PACKAGECONFIG[stb] = "-DCORE_PLATFORM_NAME=stb,,"
 PACKAGECONFIG[raspberrypi] = "-DCORE_PLATFORM_NAME=rbpi,,userland"
 PACKAGECONFIG[amlogic] = "-DCORE_PLATFORM_NAME=aml,,"
 PACKAGECONFIG[wayland] = "-DCORE_PLATFORM_NAME=wayland -DWAYLAND_RENDER_SYSTEM=gles,,wayland waylandpp"
+
+# Features
 
 PACKAGECONFIG[opengl] = "-DENABLE_OPENGL=ON,,"
 PACKAGECONFIG[openglesv2] = "-DENABLE_GLES=ON,,virtual/egl"
@@ -160,17 +162,13 @@ EXTRA_OECMAKE = " \
     -DWITH_TEXTUREPACKER=${STAGING_BINDIR_NATIVE}/TexturePacker \
     -DWITH_JSONSCHEMABUILDER=${STAGING_BINDIR_NATIVE}/JsonSchemaBuilder \
     \
-    -DENABLE_LDGOLD=ON \
-    -DENABLE_STATIC_LIBS=FALSE \
     -DCMAKE_NM='${NM}' \
-    -DUSE_LTO=${@oe.utils.cpu_count()} \
     \
     -DFFMPEG_PATH=${STAGING_DIR_TARGET} \
     -DLIBDVD_INCLUDE_DIRS=${STAGING_INCDIR} \
     -DNFS_INCLUDE_DIR=${STAGING_INCDIR} \
     -DSHAIRPLAY_INCLUDE_DIR=${STAGING_INCDIR} \
     \
-    -DENABLE_AIRTUNES=ON \
     -DENABLE_OPTICAL=OFF \
     -DENABLE_DVDCSS=OFF \
     -DENABLE_DEBUGFISSION=OFF \
@@ -181,12 +179,9 @@ EXTRA_OECMAKE_append_mipsarch = " -DWITH_ARCH=${TARGET_ARCH}"
 
 LDFLAGS += "${TOOLCHAIN_OPTIONS}"
 LDFLAGS_append_mipsarch = " -latomic -lpthread"
+LDFLAGS_append_arm = " -lpthread"
 
-# OECMAKE_GENERATOR="Unix Makefiles"
-# PARALLEL_MAKE = " "
-
-FULL_OPTIMIZATION_armv7a = "-fexpensive-optimizations -fomit-frame-pointer -O3 -ffast-math"
-FULL_OPTIMIZATION_armv7ve = "-fexpensive-optimizations -fomit-frame-pointer -O3 -ffast-math"
+FULL_OPTIMIZATION_armv7a = "-fexpensive-optimizations -fomit-frame-pointer -O4 -ffast-math"
 BUILD_OPTIMIZATION = "${FULL_OPTIMIZATION}"
 
 # for python modules
@@ -199,22 +194,15 @@ export PYTHON_DIR
 export TARGET_PREFIX
 
 do_configure_prepend() {
-    # Ensure 'nm' can find the lto plugins 
-    liblto=$(find ${STAGING_DIR_NATIVE} -name "liblto_plugin.so.0.0.0")
-    mkdir -p ${STAGING_LIBDIR_NATIVE}/bfd-plugins
-    ln -sf $liblto ${STAGING_LIBDIR_NATIVE}/bfd-plugins/liblto_plugin.so
+        # Ensure 'nm' can find the lto plugins 
+        liblto=$(find ${STAGING_DIR_NATIVE} -name "liblto_plugin.so.0.0.0")
+        mkdir -p ${STAGING_LIBDIR_NATIVE}/bfd-plugins
+        ln -sf $liblto ${STAGING_LIBDIR_NATIVE}/bfd-plugins/liblto_plugin.so
 
-    sed -i -e 's:CMAKE_NM}:}${TARGET_PREFIX}gcc-nm:' ${S}/xbmc/cores/DllLoader/exports/CMakeLists.txt
+        sed -i -e 's:CMAKE_NM}:}${TARGET_PREFIX}gcc-nm:' ${S}/xbmc/cores/DllLoader/exports/CMakeLists.txt
 }
 
-INSANE_SKIP_${PN} = "rpaths already-stripped"
-
-FILES_${PN} = "${libdir}/kodi ${libdir}/xbmc"
-FILES_${PN} += "${bindir}/kodi ${bindir}/xbmc"
-FILES_${PN} += "${datadir}/icons ${datadir}/kodi ${datadir}/xbmc"
-FILES_${PN} += "${bindir}/kodi-standalone ${bindir}/xbmc-standalone ${datadir}/xsessions"
-FILES_${PN} += "${libdir}/firewalld"
-FILES_${PN}-dev = "${includedir}"
+FILES_${PN} += "${datadir}/xsessions ${datadir}/icons ${libdir}/xbmc ${datadir}/xbmc ${libdir}/firewalld"
 FILES_${PN}-dbg += "${libdir}/kodi/.debug ${libdir}/kodi/*/.debug ${libdir}/kodi/*/*/.debug ${libdir}/kodi/*/*/*/.debug"
 
 # kodi uses some kind of dlopen() method for libcec so we need to add it manually
@@ -222,25 +210,25 @@ FILES_${PN}-dbg += "${libdir}/kodi/.debug ${libdir}/kodi/*/.debug ${libdir}/kodi
 RRECOMMENDS_${PN}_append = " libcec \
                              libcurl \
                              libnfs \
+                             nspr \
                              nss \
-                             os-release \
                              ${@bb.utils.contains('PACKAGECONFIG', 'x11', 'xdyinfo xrandr xinit mesa-demos', '', d)} \
-                             ${PYTHON_PN} \
-                             ${PYTHON_PN}-ctypes \
-                             ${@bb.utils.contains("PYTHON_PN", "python", "${PYTHON_PN}-lang", "", d)} \
-                             ${@bb.utils.contains("PYTHON_PN", "python", "${PYTHON_PN}-re", "", d)} \
-                             ${PYTHON_PN}-netclient \
-                             ${PYTHON_PN}-html \
-                             ${PYTHON_PN}-difflib \
-                             ${PYTHON_PN}-json \
-                             ${@bb.utils.contains("PYTHON_PN", "python", "${PYTHON_PN}-zlib", "", d)} \
-                             ${PYTHON_PN}-shell \
-                             ${PYTHON_PN}-sqlite3 \
-                             ${PYTHON_PN}-compression \
-                             ${PYTHON_PN}-xmlrpc \
-                             ${PYTHON_PN}-pycryptodomex \
-                             ${PYTHON_PN}-mechanize \
-                             ${PYTHON_PN}-profile \
+                             os-release \
+                             python \
+                             python-ctypes \
+                             python-lang \
+                             python-re \
+                             python-netclient \
+                             python-html \
+                             python-difflib \
+                             python-pycryptodome \
+                             python-pycryptodomex \
+                             python-json \
+                             python-zlib \
+                             python-shell \
+                             python-sqlite3 \
+                             python-compression \
+                             python-xmlrpc \
                              tzdata-africa \
                              tzdata-americas \
                              tzdata-antarctica \
@@ -251,11 +239,10 @@ RRECOMMENDS_${PN}_append = " libcec \
                              tzdata-europe \
                              tzdata-pacific \
                              xkeyboard-config \
-                             kodi-addon-inputstream-adaptive-matrix \
-                             kodi-addon-inputstream-rtmp-matrix \
+                             kodi-addon-inputstream-adaptive \
+                             kodi-addon-inputstream-rtmp \
                              alsa-plugins \
                            "
-
 RRECOMMENDS_${PN}_append_libc-glibc = " glibc-charmap-ibm850 \
                                         glibc-gconv-ibm850 \
                                         glibc-charmap-ibm437 \
@@ -266,4 +253,4 @@ RRECOMMENDS_${PN}_append_libc-glibc = " glibc-charmap-ibm850 \
                                         glibc-localedata-en-us \
                                       "
 # customizations should be in the BSP layers
-require kodi_19.inc
+require kodi_18.inc

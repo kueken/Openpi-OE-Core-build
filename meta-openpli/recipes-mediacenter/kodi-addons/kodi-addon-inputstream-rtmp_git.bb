@@ -5,13 +5,15 @@ require conf/license/license-gplv2.inc
 
 inherit kodi-addon
 
-DEPENDS += "expat"
+DEPENDS += "librtmp \
+            expat \
+            "
 
-SRCREV = "8505b6a7335f623d17d4c2866fa5a11fe2ca02b7"
+SRCREV = "${AUTOREV}"
 
-PV = "3.4.0+gitr${SRCPV}"
+PV = "2.0.9+gitr${SRCPV}"
 
-KODIADDONBRANCH = "Matrix"
+KODIADDONBRANCH = "Leia"
 
 SRC_URI = "git://github.com/xbmc/inputstream.rtmp.git;protocol=https;branch=${KODIADDONBRANCH} \
          "
