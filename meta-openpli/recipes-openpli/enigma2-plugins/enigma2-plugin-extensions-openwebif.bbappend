@@ -93,6 +93,7 @@ python do_cleanup () {
         ('h6', 'h5.png', 'h3.png', 'h3.html'),
         ('h7', 'h7.png', 'h3.png', 'h3.html'),
         ('h9', 'h9.png', 'h3.png', 'h3.html'),
+        ('h11', 'h11.png', 'h3.png', 'h3.html'),       
         ('i55', 'i55.png', 'i55.png', 'i55.html'),
         ('i55plus', 'i55plus.png', 'h3.png', 'h3.html'),
         ('h9combo', 'h9combo.png', 'h3.png', 'h3.html'),
@@ -113,6 +114,7 @@ python do_cleanup () {
         ('ustym4kpro', 'ustym4kpro.png', 'uclan.png', 'uclan.html'),
         ('spark', 'spark.jpg', 'spark.png', 'spark.html'),
         ('spark7162', 'spark7162.jpg', 'spark.png', 'spark.html'),
+        ('pulse4k', 'pulse4k.png', 'pulse4k.png', 'pulse4k.html'),
     ]
 
     import os
