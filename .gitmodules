@@ -83,3 +83,6 @@
 [submodule "meta-uclan"]
 	path = meta-uclan
 	url = https://github.com/zhtq/meta-uclan
+[submodule "meta-abcom"]
+	path = meta-abcom
+	url = https://github.com/Ceryon-bsp/meta-pulse4k
