@@ -73,7 +73,7 @@ BBLAYERS ?= \
 	$(CURDIR)/meta-octagon \
 	$(CURDIR)/meta-fulan \
 	$(CURDIR)/meta-uclan \
-	$(CURDIR)/meta-ceryon \
+	$(CURDIR)/meta-abcom \
 	$(CURDIR)/meta-local \
 	$(CURDIR)/meta-qt5
 
