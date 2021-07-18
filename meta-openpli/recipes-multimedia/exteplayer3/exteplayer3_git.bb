@@ -15,7 +15,7 @@ PKGV = "69+gitr${GITPKGV}"
 SRCREV = "${AUTOREV}"
 SRC_URI = "git://github.com/kueken/exteplayer3.git;branch=master"
 
-S = "${WORKDIR}/git/"
+S = "${WORKDIR}/git"
 
 
 SOURCE_FILES = "main/exteplayer.c"

@@ -11,7 +11,7 @@ PKGV = "1.1+git${GITPKGV}"
 
 SRC_URI = "git://github.com/OpenVisionE2/e2isubparser.git;protocol=git"
 
-S = "${WORKDIR}/git/"
+S = "${WORKDIR}/git"
 
 SOURCE_FILES = "src/subparsermodule.c"
 SOURCE_FILES =+ "src/vlc/src/subtitle.c"

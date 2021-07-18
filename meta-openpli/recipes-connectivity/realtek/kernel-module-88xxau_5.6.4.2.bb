@@ -11,7 +11,6 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 RREPLACES_${PN} = "kernel-module-8812au kernel-module-8814au"
 RCONFLICTS_${PN} = "kernel-module-8812au kernel-module-8814au"
 
-PR = "2"
 SRC_URI = " \
           git://github.com/aircrack-ng/rtl8812au.git;branch=v5.6.4.2 \
           "

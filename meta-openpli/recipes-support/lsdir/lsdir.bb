@@ -10,7 +10,7 @@ PKGV = "2.1+git${GITPKGV}"
 
 SRC_URI = "git://github.com/e2iplayer/e2ibox.git;protocol=git"
 
-S = "${WORKDIR}/git/"
+S = "${WORKDIR}/git"
 
 SOURCE_FILES = "src/lsdir.c src/lsdir.h src/main.c src/cmdwrapper.h src/cmdwrapper.c"
 
