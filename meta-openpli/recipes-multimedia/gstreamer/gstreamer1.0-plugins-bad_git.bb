@@ -33,7 +33,6 @@ PACKAGECONFIG ??= " \
 # so disable it until fixed, or remove later
 # ${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'gl', '', d)} 
 
-
 PACKAGECONFIG[aom]             = "-Daom=enabled,-Daom=disabled,aom"
 PACKAGECONFIG[assrender]       = "-Dassrender=enabled,-Dassrender=disabled,libass"
 PACKAGECONFIG[bluez]           = "-Dbluez=enabled,-Dbluez=disabled,bluez5"
