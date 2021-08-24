@@ -116,6 +116,7 @@ python do_cleanup () {
         ('spark', 'spark.jpg', 'spark.png', 'spark.html'),
         ('spark7162', 'spark7162.jpg', 'spark.png', 'spark.html'),
         ('pulse4k', 'pulse4k.png', 'pulse4k.png', 'pulse4k.html'),
+        ('pulse4kmini', 'pulse4kmini.png', 'pulse4k.png', 'pulse4k.html'),
     ]
 
     import os
