@@ -96,7 +96,7 @@ OPTIONAL_PACKAGES += " \
 	nano \
 	net-snmp \
 	net-tools \
-	${@bb.utils.contains('TARGET_FPU', 'soft', '', 'nodejs', d)} \
+	perl \
 	ntfs-3g \
 	ntp \
 	ofgwrite \
