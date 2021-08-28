@@ -70,15 +70,14 @@ ENIGMA2_PLUGINS += "\
 DEPENDS += " \
 	enigma2 \
 	"
-IMAGE_INSTALL_append_mipsel += " \
-	${@bb.utils.contains('TARGET_FPU', 'soft', '', 'nodejs', d)} \
-	"
+
 IMAGE_INSTALL += " \
 	aio-grab \
 	enigma2 \
 	libavahi-client \
 	ntpdate \
 	ofgwrite \
+	perl \
 	settings-autorestore \
 	tuxbox-common \
 	htop \
