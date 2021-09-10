@@ -43,6 +43,7 @@ do_compile() {
 do_install() {
 	install -d ${D}${INSTALLDIR}
 	cp -r . ${D}${INSTALLDIR}/
+	rm -rf ${D}${INSTALLDIR}/.git
 	install -d ${D}${sysconfdir}/init.d
 	install -m 755 ${WORKDIR}/sabnzbd ${D}${sysconfdir}/init.d/sabnzbd
 	install -m 755 ${WORKDIR}/init-functions ${D}${sysconfdir}/init.d/init-functions
