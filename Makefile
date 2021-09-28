@@ -51,6 +51,7 @@ BBLAYERS ?= \
 	$(CURDIR)/meta-openembedded/meta-python \
 	$(CURDIR)/meta-openembedded/meta-webserver \
 	$(CURDIR)/openembedded-core/meta \
+	$(CURDIR)/meta-python2 \
 	$(CURDIR)/meta-openpli \
 	$(CURDIR)/meta-dream \
 	$(CURDIR)/meta-vuplus \
@@ -72,7 +73,6 @@ BBLAYERS ?= \
 	$(CURDIR)/meta-axasuhd \
 	$(CURDIR)/meta-maxytec \
 	$(CURDIR)/meta-octagon \
-	$(CURDIR)/meta-fulan \
 	$(CURDIR)/meta-uclan \
 	$(CURDIR)/meta-abcom \
 	$(CURDIR)/meta-qt5
