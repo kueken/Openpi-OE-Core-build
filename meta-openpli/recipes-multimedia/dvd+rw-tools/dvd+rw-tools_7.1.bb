@@ -2,7 +2,6 @@ SUMMARY = "tools to write DVDs"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=8ca43cbc842c2336e835926c2166c28b"
 PR = "r4"
-
 DEPENDS += "m4-native"
 RDEPENDS_${PN} += "cdrkit"
 SRC_URI = "http://fy.chalmers.se/~appro/linux/DVD+RW/tools/dvd+rw-tools-${PV}.tar.gz \
@@ -18,21 +17,22 @@ SRC_URI = "http://fy.chalmers.se/~appro/linux/DVD+RW/tools/dvd+rw-tools-${PV}.ta
           "
 
 do_configure() {
-	m4 -DOS=Linux Makefile.m4 >Makefile
+    m4 -DOS=Linux Makefile.m4 >Makefile
 }
 
 do_compile() {
-	oe_runmake CC="${CC}" CXX="${CXX}" dvd+rw-tools
+    oe_runmake CC="${CC}" CXX="${CXX}" dvd+rw-tools
 }
 
 do_install() {
-	install -d ${D}${bindir}
-	install -m 755 ${S}/growisofs ${D}${bindir}
-	install -m 755 ${S}/dvd+rw-booktype ${D}${bindir}
-	install -m 755 ${S}/dvd+rw-format ${D}${bindir}
-	install -m 755 ${S}/dvd+rw-mediainfo ${D}${bindir}
-	install -m 755 ${S}/dvd-ram-control ${D}${bindir}
+    install -d ${D}${bindir}
+    install -m 755 ${S}/growisofs ${D}${bindir}
+    install -m 755 ${S}/dvd+rw-booktype ${D}${bindir}
+    install -m 755 ${S}/dvd+rw-format ${D}${bindir}
+    install -m 755 ${S}/dvd+rw-mediainfo ${D}${bindir}
+    install -m 755 ${S}/dvd-ram-control ${D}${bindir}
 }
+
 
 SRC_URI[md5sum] = "8acb3c885c87f6838704a0025e435871"
 SRC_URI[sha256sum] = "f8d60f822e914128bcbc5f64fbe3ed131cbff9045dca7e12c5b77b26edde72ca"

@@ -97,6 +97,7 @@ OPTIONAL_PACKAGES += " \
 	mtd-utils \
 	mtools \
 	nano \
+	ndisc6 \
 	net-snmp \
 	net-tools \
 	perl \

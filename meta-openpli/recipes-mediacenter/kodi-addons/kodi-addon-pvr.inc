@@ -9,10 +9,10 @@ DEPENDS += " \
             libtinyxml2 \
             jsoncpp \
             jsonrpc \
-            virtual/kodi \
+            kodi \
           "
 
-PACKAGE_ARCH = "${MACHINE}"
+PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 SRCREV_FORMAT = "pvr${KODIADDONPLUGIN}"
 
