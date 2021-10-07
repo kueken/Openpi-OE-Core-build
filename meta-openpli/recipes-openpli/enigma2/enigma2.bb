@@ -40,11 +40,12 @@ RRECOMMENDS_${PN} = " \
 RRECOMMENDS_${PN}_append_libc-glibc = " glibc-gconv-utf-16"
 
 PYTHON_RDEPS = " \
-	python-numbers \
 	python-codecs \
 	python-core \
 	python-crypt \
 	python-fcntl \
+	python-image \
+	python-imaging \
 	python-lang \
 	python-logging \
 	python-mmap \
@@ -53,12 +54,14 @@ PYTHON_RDEPS = " \
 	python-netserver \
 	python-numbers \
 	python-pickle \
+	python-process \
 	python-psutil \
 	python-pycryptodome \
+	python-pyusb \
 	python-re \
 	python-requests \
-	python-shell \
 	python-service-identity \
+	python-shell \
 	python-six \
 	python-threading \
 	python-twisted-core \
@@ -66,9 +69,6 @@ PYTHON_RDEPS = " \
 	python-xml \
 	python-zlib \
 	python-zopeinterface \
-	python-pyusb \
-	python-image \
-	python-imaging \
 	python-youtube-dl \
 	"
 
