@@ -54,7 +54,7 @@ PYTHON_RDEPS = " \
 	python-netserver \
 	python-numbers \
 	python-pickle \
-	python-process \
+	python-subprocess32 \
 	python-psutil \
 	python-pycryptodome \
 	python-pyusb \
