@@ -72,10 +72,10 @@ OPTIONAL_PACKAGES += " \
 	edid-decode \
 	evtest \
 	exfat-utils \
-	${@bb.utils.contains_any("MACHINE_FEATURES", "hisil libeplayer", "", "exteplayer3", d)} \
+	exteplayer3 \
 	gdb \
 	grep \
-	${@bb.utils.contains_any("MACHINE_FEATURES", "hisil libeplayer", "", "gstplayer", d)} \
+	gstplayer \
 	hddtemp \
 	hdparm \
 	htop \
@@ -133,7 +133,7 @@ OPTIONAL_PACKAGES += " \
 	python-evdev \
 	picocom \
 	ppp \
-	${@bb.utils.contains("DEFAULTTUNE", "sh4", "" , "rclone zerotier", d)} \
+	rclone \
 	rsync \
 	rtorrent \
 	sabnzbd \
@@ -193,15 +193,15 @@ OPTIONAL_ENIGMA2_PACKAGES = " \
 	enigma2-plugin-systemplugins-mountmanager \
 	enigma2-plugin-systemplugins-signalfinder \
 	enigma2-plugin-systemplugins-extnumberzap \
-	${@bb.utils.contains_any("MACHINE_FEATURES", "hisil libeplayer", "", "enigma2-plugin-systemplugins-serviceapp", d)} \
+	enigma2-plugin-systemplugins-serviceapp \
 	enigma2-plugin-systemplugins-hrtunerproxy \
 	enigma2-plugin-systemplugins-quadpip \
 	enigma2-plugin-systemplugins-extrafancontrol \
 	enigma2-plugin-systemplugins-radiotimesxmltvemulator \
 	enigma2-plugin-extensions-historyzapselector \
-	${@bb.utils.contains_any("MACHINE_FEATURES", "hisil libeplayer", "", "enigma2-plugin-extensions-install-exteplayer3", d)} \
+	enigma2-plugin-extensions-install-exteplayer3 \
 	enigma2-plugin-extensions-install-ffmpeg \
-	${@bb.utils.contains_any("MACHINE_FEATURES", "hisil libeplayer", "", "enigma2-plugin-extensions-install-gstplayer", d)} \
+	enigma2-plugin-extensions-install-gstplayer \
 	enigma2-plugin-extensions-lcd4linux \
 	enigma2-plugin-extensions-tmbd \
 	enigma2-plugin-extensions-xmodem \
