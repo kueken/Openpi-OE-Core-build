@@ -121,11 +121,10 @@ PV = "2.7+git${SRCPV}"
 PKGV = "2.7+git${GITPKGV}"
 
 ENIGMA2_BRANCH ?= "develop"
-GITHUB_URI ?= "https://github.com"
-SRC_URI = " ${GITHUB_URI}/OpenPLi/enigma2.git;branch=${ENIGMA2_BRANCH} \
+GITHUB_URI ?= "git://github.com"
+SRC_URI = "${GITHUB_URI}/OpenPLi/${BPN}.git;branch=${ENIGMA2_BRANCH}${@ ';protocol=https' if d.getVar('GITHUB_URI', '').startswith('git://github.com') else '' } \
 			file://01-use-mallinfo2.patch \
-			"
-
+            "
 LDFLAGS_prepend = " -lxml2 "
 
 S = "${WORKDIR}/git"
