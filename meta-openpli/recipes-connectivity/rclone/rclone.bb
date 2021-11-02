@@ -18,7 +18,7 @@ inherit gittag
 PV = "git${SRCPV}"
 PKGV = "${GITPKGVTAG}"
 
-SRC_URI = "git://github.com/rclone/rclone;protocol=https;branch=master \
+SRC_URI = "https://github.com/rclone/rclone;protocol=https;branch=master \
            file://rclonefs"
 
 S = "${WORKDIR}/git"

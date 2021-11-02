@@ -10,7 +10,7 @@ inherit gitpkgv
 PV = "1.0+git${SRCPV}"
 PKGV = "1.0+git${GITPKGV}"
 
-SRC_URI = "git://github.com/selsta/hlsdl.git;protocol=git"
+SRC_URI = "https://github.com/selsta/hlsdl;protocol=git"
 SRCREV = "${AUTOREV}"
 
 S = "${WORKDIR}/git"

@@ -5,6 +5,6 @@ DEPENDS = "libdvdnav"
 
 inherit autotools pkgconfig git-project
 
-SRC_URI = " git://github.com/mirakels/libdreamdvd.git \
+SRC_URI = "https://github.com/mirakels/libdreamdvd \
 	file://move-function-pointer-away-from-header.patch \
 "
