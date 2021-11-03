@@ -11,7 +11,7 @@ PV = "1.0+git${SRCPV}"
 PKGV = "1.0+git${GITPKGV}"
 
 SRC_URI= " \
-	git://github.com/BlackHole/MX_HQ9W.git;protocol=git \
+	git://github.com/BlackHole/MX_HQ9W.git;protocol=git;protocol=https; \
 	file://rc.patch;patch=1 \
 	file://pli.png \
 	file://pli.patch;patch=1 \

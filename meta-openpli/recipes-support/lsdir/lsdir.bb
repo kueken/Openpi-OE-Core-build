@@ -8,7 +8,7 @@ inherit gitpkgv
 PV = "2.1+git${SRCPV}"
 PKGV = "2.1+git${GITPKGV}"
 
-SRC_URI = "git://github.com/e2iplayer/e2ibox.git;protocol=git"
+SRC_URI = "git://github.com/e2iplayer/e2ibox.git;protocol=https"
 
 S = "${WORKDIR}/git"
 

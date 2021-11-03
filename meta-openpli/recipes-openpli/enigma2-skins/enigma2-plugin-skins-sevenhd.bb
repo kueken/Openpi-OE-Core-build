@@ -10,7 +10,7 @@ SRCREV = "${AUTOREV}"
 PV = "1.0+git${SRCPV}"
 PKGV = "1.0+git${GITPKGV}"
 
-SRC_URI= "git://github.com/KravenHD/SevenHD.git"
+SRC_URI= "git://github.com/KravenHD/SevenHD.git;protocol=https;"
 
 S = "${WORKDIR}/git"
 

@@ -12,7 +12,7 @@ PKGV = "1+git${GITPKGV}"
 
 inherit autotools-brokensep pkgconfig
 
-SRC_URI = "https://github.com/pcherenkov/udpxy file://udpxy.sh"
+SRC_URI = "git://github.com/pcherenkov/udpxy.git;protocol=https file://udpxy.sh"
 
 CFLAGS_append_mipsel += " -Wno-error=stringop-truncation "
 CFLAGS_append_arm += " -Wno-error=stringop-truncation "
