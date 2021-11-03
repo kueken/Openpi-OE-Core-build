@@ -7,7 +7,7 @@ DESCRIPTION = "tuxbox tuxtxt for enigma2"
 inherit gitpkgv
 
 GITHUB_URI ?= "git://github.com"
-SRC_URI = "${GITHUB_URI}/OpenPLi/tuxtxt.git${@ ';protocol=https' if d.getVar('GITHUB_URI', '').startswith('git://github.com') else '' }"
+SRC_URI = "${GITHUB_URI}/OpenPLi/tuxtxt.git"
 
 S = "${WORKDIR}/git/tuxtxt"
 
