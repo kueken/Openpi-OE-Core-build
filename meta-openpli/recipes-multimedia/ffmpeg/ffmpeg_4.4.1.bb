@@ -24,7 +24,7 @@ LIC_FILES_CHKSUM = "file://COPYING.GPLv2;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
                     file://COPYING.LGPLv3;md5=e6a600fd5e1d9cbde2d983680233ad02"
 
 SRCREV = "${AUTOREV}"
-SRC_URI = "https://github.com/FFmpeg/FFmpeg;branch=release/4.4 \
+SRC_URI = "git://github.com/FFmpeg/FFmpeg.git;protocol=https;branch=release/4.4 \
            file://4_mips64_cpu_detection.patch \
            file://0001-libavutil-include-assembly-with-full-path-from-sourc.patch \
            "
