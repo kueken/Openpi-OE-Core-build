@@ -12,6 +12,7 @@ INITSCRIPT_PARAMS = "defaults"
 inherit autotools update-rc.d pkgconfig gettext
 
 EXTRA_OECONF = "--with-external-libupnp --with-fuse-prefix='${STAGING_LIBDIR}'"
+
 SRC_URI = "${SOURCEFORGE_MIRROR}/djmount/djmount-0.71.tar.gz \
 	file://init \
 	file://configure.ac.patch \

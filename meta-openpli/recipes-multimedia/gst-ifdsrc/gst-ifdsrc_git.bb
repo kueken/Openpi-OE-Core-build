@@ -6,11 +6,11 @@ DEPENDS = "gstreamer1.0 gstreamer1.0-plugins-base"
 require conf/license/openpli-gplv2.inc
 inherit gitpkgv autotools pkgconfig
 
+SRCREV = "${AUTOREV}"
 PV = "1.0+git${SRCPV}"
 PKGV = "1.0+git${GITPKGV}"
 
-SRC_URI = "git://gitlab.com/samsamsam/iptvplayer-bin-components.git;protocol=http"
-SRCREV = "${AUTOREV}"
+SRC_URI = "git://gitlab.com/samsamsam/iptvplayer-bin-components.git;protocol=https"
 
 S = "${WORKDIR}/git/gst-ifdsrc/gst-ifdsrc"
 
