@@ -13,12 +13,11 @@ RDEPENDS_${PN} = "python-core \
     python-ctypes \
     python-futures \
     python-isodate \
-    python-iso3166 \
-    python-iso639 \
     python-lxml \
     python-misc \
     python-pkgutil \
     python-pycryptodome \
+    python-pycountry \
     python-pysocks \
     python-requests \
     python-shell \
