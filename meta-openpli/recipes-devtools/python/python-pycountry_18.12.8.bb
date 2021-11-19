@@ -10,3 +10,6 @@ inherit setuptools pypi
 
 SRC_URI[sha256sum] = "8ec4020b2b15cd410893d573820d42ee12fe50365332e58c0975c953b60a16de"
 
+do_install_append() {
+    rm -rf ${D}${libdir}/${PYTHON_DIR}/site-packages/pycountry/locales*
+}
