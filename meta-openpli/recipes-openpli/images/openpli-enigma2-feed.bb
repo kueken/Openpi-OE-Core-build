@@ -101,6 +101,7 @@ OPTIONAL_PACKAGES += " \
 	net-snmp \
 	net-tools \
 	perl \
+	phodav \
 	ntfs-3g \
 	ntp \
 	ofgwrite \
